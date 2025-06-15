@@ -31,10 +31,10 @@ class HomeScreen extends StatelessWidget {
                     //   ),
                     // );
                     UserModel userModel = UserModel(
-                        id: 1,
-                        title: "title112",
-                        userId: 112,
-                        body: "body112");
+                        id: state.userEntityList[index].id,
+                        title: "title${state.userEntityList[index].id}",
+                        userId: state.userEntityList[index].id,
+                        body: "body${state.userEntityList[index].id}");
                     context.read<PostsBloc>().add(AddPostsEvent(userModel));
                   },
                   child: Card(

@@ -23,11 +23,12 @@ class GetDataSource {
   }
 
   Future<UserModel> addPost(UserModel userModel) async {
-    var response = await dioClient.put("/posts/1", userModel.toJson());
+    var response =
+        await dioClient.put("/posts/${userModel.id}", userModel.toJson());
     // var response =
     //     await get(Uri.parse("https://jsonplaceholder.typicode.com/posts"));
 
-    if (response.statusCode == 201) {
+    if (response.statusCode == 200) {
       // final decoded = json.decode(response.data);
       // final decoded = response.data as List;
       // return decoded.map((e) => UserModel.fromJson(e)).toList();

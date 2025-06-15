@@ -28,10 +28,14 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       // emit(PostsLoadingState());
       try {
         final userModel = await addUsecase(event.userModel);
-        var addState = state as PostsSuccessState;
-        var data = addState.userEntityList;
-        data.add(userModel);
-        emit(PostsSuccessState(data));
+        if (state is PostsSuccessState) {
+          var addState = state as PostsSuccessState;
+          final data = List<UserEntity>.from(addState.userEntityList)
+            ..add(userModel);
+          emit(PostsSuccessState(data));
+        } else {
+          emit(PostsFailureState("failed to post new item"));
+        }
       } catch (e) {
         emit(PostsFailureState(e.toString()));
       }
